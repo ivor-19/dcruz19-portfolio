@@ -150,7 +150,7 @@ export default function Home() {
           <Magnet padding={100} disabled={false} magnetStrength={50} wrapperClassName="h-full w-full col-span-2" innerClassName=" aspect-video bg-muted/20 border border-border/50 rounded-2xl overflow-hidden relative group">
             <img 
               src="/" 
-              alt="Workspace" 
+              alt="my-photo" 
               className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" 
             />
           </Magnet>

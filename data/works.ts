@@ -1,19 +1,5 @@
 export const works = [
   {
-    id: 'computer-lab-monitoring-system',
-    title: 'Computer Lab Monitoring & Attendance System',
-    subtitle: 'Real-time checks and attendance tracking',
-    description: 'A web app to watch computer lab use and track student attendance. It has easy features like live device checks, QR code sign-ins, sorting and filtering logs, and profile edits.',
-    tags: ['React', 'Typescript', 'TanStack Table', 'Tailwind CSS', 'Axios', 'Node.js', 'Express', 'MongoDB', 'QRCode'],
-    image: [
-      '/images/neuronest/1.png', 
-      '/images/neuronest/2.png', 
-      '/images/neuronest/3.png'
-    ],
-    github: 'https://github.com/ivor-19/ComputerLabAttendance',
-    website: 'https://wb-computer-lab-monitoring-attendance.vercel.app/'
-  },
-  {
     id: 'alert-now',
     title: 'Alert Now',
     subtitle: 'Real-time Emergency Alert ',
@@ -28,7 +14,10 @@ export const works = [
       '/images/alertnow/6.jpg', 
       '/images/alertnow/7.jpg', 
       '/images/alertnow/8.png'
-    ]
+    ],
+    github: 'https://github.com/ivor-19/alert-now-app',
+    video: '/videos/alertnow-promo.mp4',
+    apk: 'https://github.com/ivor-19/alert-now-app/releases/download/v1/alert-now.apk'
   },
   {
     id: 'airguard',
@@ -62,8 +51,24 @@ export const works = [
       '/images/airguard/b3.png'
     ],
     github: 'https://github.com/ivor-19/AIRGUARD-Compiled',
+    video: '/videos/airguard-promo.mp4',
   },
-
+  {
+    id: 'computer-lab-monitoring-system',
+    title: 'Computer Lab Monitoring & Attendance System',
+    subtitle: 'Real-time checks and attendance tracking',
+    description: 'A web app to watch computer lab use and track student attendance. It has easy features like live device checks, QR code sign-ins, sorting and filtering logs, and profile edits.',
+    tags: ['React', 'Typescript', 'TanStack Table', 'Tailwind CSS', 'Axios', 'Node.js', 'Express', 'MongoDB', 'QRCode'],
+    image: [
+      '/images/comlab/1.png', 
+      '/images/comlab/2.png', 
+      '/images/comlab/3.png',
+      '/images/comlab/4.png', 
+      '/images/comlab/5.png',
+    ],
+    github: 'https://github.com/ivor-19/ComputerLabAttendance',
+    website: 'https://wb-computer-lab-monitoring-attendance.vercel.app/'
+  },
   {
     id: 'neuronest',
     title: 'NeuroNest',
@@ -71,9 +76,15 @@ export const works = [
     description: 'NeuroNest is a modern Learning Management System built to simplify digital learning. Students can access modules, take quizzes, and view their scores, while teachers can create lessons, design quizzes, and assign content to their classes. It’s a fast, intuitive platform designed for seamless classroom engagement.',
     tags: ['React', 'Typescript', 'Tailwind CSS', 'Node.js', 'Laravel', 'MySQL', 'Inertia.js'],
     image: [
-      '/images/neuronest/1.png', 
       '/images/neuronest/2.png', 
-      '/images/neuronest/3.png'
+      '/images/neuronest/1.png', 
+      '/images/neuronest/3.png',
+      '/images/neuronest/4.png', 
+      '/images/neuronest/5.png', 
+      '/images/neuronest/6.png',
+      '/images/neuronest/7.png', 
+      '/images/neuronest/8.png', 
+      '/images/neuronest/9.png',
     ],
     github: 'https://github.com/ivor-19/NeuroNest',
   },
@@ -95,6 +106,7 @@ export const works = [
       '/images/mycompanion/9.jpg'
     ],
     github: 'https://github.com/ivor-19/mycompanion-app/tree/v2',
-    video: '/videos/mycompanion-promo.mp4'
+    video: '/videos/mycompanion-promo.mp4',
+    apk: 'https://github.com/ivor-19/mycompanion-app/releases/download/v1/my_companionv1.apk'
   }
 ]

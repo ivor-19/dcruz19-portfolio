@@ -7,7 +7,7 @@ import { Skeleton } from './ui/skeleton'
 import { WorkData } from '@/lib/types'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel'
-import { ArrowRight, BadgeQuestionMark, ChevronRight, Github, SquareArrowDownRight, SquareArrowOutUpRightIcon } from 'lucide-react'
+import { ArrowRight, BadgeQuestionMark, ChevronRight, Download, Github, SquareArrowDownRight, SquareArrowOutUpRightIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default function MyWorksList() {
@@ -86,12 +86,21 @@ export default function MyWorksList() {
                 <section className='flex flex-col justify-between '>               
                   <div className='flex justify-between items-center'>
                     <div className='flex gap-2'>
-                      <div className='bg-muted h-8 w-8 rounded-sm flex items-center justify-center hover:bg-accent cursor-target'>
-                        <Github size={20}/>
-                      </div>
-                      <div className='bg-muted h-8 w-8 rounded-sm flex items-center justify-center hover:bg-accent cursor-target'>
-                        <SquareArrowOutUpRightIcon size={20}/>
-                      </div>
+                      {work?.github && 
+                        <Link href={work.github} target="_blank" rel="noopener noreferrer" className='bg-muted h-8 w-8 rounded-sm flex items-center justify-center hover:bg-accent cursor-target'>
+                          <Github size={16}/>
+                        </Link> 
+                      }
+                      {work?.apk && 
+                        <Link href={work.apk} target="_blank" rel="noopener noreferrer" className='bg-muted h-8 w-8 rounded-sm flex items-center justify-center hover:bg-accent cursor-target'>
+                          <Download size={16}/>
+                        </Link> 
+                      } 
+                      {work?.website && 
+                        <Link href={work.website} target="_blank" rel="noopener noreferrer" className='bg-muted h-8 w-8 rounded-sm flex items-center justify-center hover:bg-accent cursor-target'>
+                          <SquareArrowOutUpRightIcon size={16}/>
+                        </Link> 
+                      }
                     </div>
                     <Link href={`/workDetails/${work.id}`}>
                       <div className='bg-muted gap-2 h-8 px-2 text-xs rounded-sm flex items-center justify-center hover:bg-accent cursor-target'>
