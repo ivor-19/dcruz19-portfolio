@@ -1,6 +1,7 @@
 import { Facebook, Github, Linkedin } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Magnet from './Magnet';
+import Link from 'next/link';
 
 interface Props {
   style?: string,
@@ -9,9 +10,9 @@ interface Props {
 export default function QuickLinks({style} : Props) {
 
   const links = [
-    { name: "Facebook", icon: Facebook },
-    { name: "Github", icon: Github },
-    { name: "LinkedIn", icon: Linkedin },
+    { name: "Facebook", icon: Facebook, url: 'https://www.facebook.com/ivor.cruz.3/' },
+    { name: "Github", icon: Github, url: 'https://github.com/ivor-19'},
+    { name: "LinkedIn", icon: Linkedin, url: 'https://www.linkedin.com/in/cruz-deniel-ivor-a11427399/' },
   ];
 
   return (
@@ -29,9 +30,11 @@ export default function QuickLinks({style} : Props) {
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
           >
             <Magnet padding={250} disabled={false} magnetStrength={20}>
-              <div className={`cursor-target w-10 h-10 rounded-full  flex items-center justify-center brightness-40 hover:brightness-100 cursor-pointer`}>
-                <Icon size={20} color='var(--primary)' className='drop-shadow-md'/>
-              </div>
+              {link.url &&  
+                <Link href={link.url} target="_blank" rel="noopener noreferrer" className={`cursor-target w-10 h-10 rounded-full  flex items-center justify-center brightness-40 hover:brightness-100 cursor-pointer`}>
+                  <Icon size={20} color='var(--primary)' className='drop-shadow-md'/>
+                </Link>
+              }
             </Magnet>
           </motion.div>
         )
