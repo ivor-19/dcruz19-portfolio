@@ -109,8 +109,8 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
           className='flex items-center justify-between'
         >
           <div className='flex flex-col gap-2'>
-            <h1 className="font-lexend text-5xl font-black drop-shadow-md"> {work.title} </h1>
-            <h5 className="drop-shadow-md text-muted-foreground"> {work.subtitle} </h5>
+            <h1 className="font-lexend text-3xl lg:text-5xl font-black drop-shadow-md"> {work.title} </h1>
+            <h5 className="drop-shadow-md text-muted-foreground text-sm sm:text-lg"> {work.subtitle} </h5>
           </div>
           <Magnet padding={50} disabled={false} magnetStrength={20}>
             <div className='flex gap-2 items-center cursor-target brightness-40 hover:brightness-100' onClick={() => router.back()}>
@@ -118,12 +118,12 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
             </div>
           </Magnet>
         </motion.div>
-        <div className='h-[500px] flex flex-col lg:flex-row w-full gap-4 '>
-         <motion.div 
+        <div className='grid grid-cols-1 lg:grid-cols-[80%_1fr] lg:grid-rows-[500px_auto] gap-4 w-full'>
+          <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-            className='flex-1 h-full'
+            className='h-[300px] lg:h-full'
           >
             <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border/50 bg-linear-to-br from-card via-card to-muted/30 shadow-sm group">
               <div className="absolute inset-0 bg-linear-to-br from-cpurple/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -148,25 +148,26 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
                         (video as any).webkitRequestFullscreen();
                       }
                     }}
-                    className="cursor-target absolute bottom-4 right-4 p-2 bg-black/50 hover:bg-black/70 rounded-lg backdrop-blur-sm transition-colors opacity-0 group-hover:opacity-100"
+                    className="cursor-target absolute bottom-4 right-4 p-2 bg-black/50 hover:bg-black/70 rounded-lg backdrop-blur-sm transition-colors "
                     aria-label="Fullscreen"
                   >
-                    <Maximize2 className="w-5 h-5 text-white" />
+                    <Maximize2 className="w-5 h-5 text-white " />
                   </Button>
                 </div>
               ) : (
-                <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
+                <div className="relative w-full h-full flex flex-col items-center justify-center gap-4 py-8">
                   <Code2 className="w-16 h-16 text-muted-foreground/30" />
                   <p className="text-muted-foreground/50 text-sm">Video preview coming soon</p>
                 </div>
               )}
             </div>
           </motion.div>
+
           <motion.div 
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-            className='w-full lg:w-[20%] rounded-lg border shadow-sm p-4 flex flex-col justify-between gap-2'
+            className='h-[300px] lg:h-full rounded-lg border shadow-sm p-4 flex flex-col justify-between gap-2'
           >
             <div className='flex-1'>
               <div className='flex items-center gap-2'>
@@ -212,25 +213,27 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
               }
             </div>
           </motion.div>
+
+          <div className=' h-40 flex rounded-lg'>
+            {work.image.map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.3 }}
+              
+              >
+                <img 
+                  src={image} 
+                  onClick={() => { setSelectedImageIndex(index), handleImageClick(index) }}
+                  className="h-24 w-24 rounded-lg brightness-80 scale-90 object-cover hover:scale-100 hover:brightness-100 cursor-target transition-color duration-300"
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <div className='grid grid-cols-9 w-full lg:w-[70%]'>
-          {work.image.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.3 }}
-             
-            >
-              <img 
-                src={image} 
-                onClick={() => { setSelectedImageIndex(index), handleImageClick(index) }}
-                className="h-24 w-24 rounded-lg brightness-80 scale-90 object-cover hover:scale-100 hover:brightness-100 cursor-target transition-color duration-300"
-              />
-            </motion.div>
-          ))}
-        </div>
+
         <section className='flex flex-col gap-4 mt-4'>
           <motion.div 
             initial={{ opacity: 0, y: 60 }}              
@@ -244,7 +247,7 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
             </div>
             <div className="relative p-8 rounded-2xl bg-linear-to-br from-card/50 to-muted/30 border border-border/50 backdrop-blur-sm">
               <div className="absolute top-0 left-0 w-32 h-32 bg-cpurple/5 rounded-full blur-3xl" />
-              <p className='relative text-muted-foreground leading-relaxed text-base'>{work.description}</p>
+              <p className='relative text-muted-foreground leading-relaxed text-sm sm:text-base'>{work.description}</p>
             </div>
           </motion.div>
         </section>
@@ -274,7 +277,7 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
                   <div className="absolute inset-0 bg-linear-to-br from-cpurple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
                   <div className="relative flex items-start gap-3">
                     <div className="mt-1 h-2 w-2 rounded-full bg-cpurple shrink-0" />
-                    <p className='text-muted-foreground group-hover:text-foreground transition-colors'>{feature}</p>
+                    <p className='text-muted-foreground group-hover:text-foreground transition-colors text-sm sm:text-base'>{feature}</p>
                   </div>
                 </motion.div>
               ))}
@@ -307,7 +310,7 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
                     <div className="absolute inset-0 bg-linear-to-br from-cpurple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
                     <div className="relative flex items-start gap-3">
                       <div className="mt-1 h-2 w-2 rounded-full bg-cpurple shrink-0" />
-                      <p className='text-muted-foreground group-hover:text-foreground transition-colors'>{item}</p>
+                      <p className='text-muted-foreground group-hover:text-foreground transition-colors text-sm sm:text-base'>{item}</p>
                     </div>
                   </motion.div>
               ))}

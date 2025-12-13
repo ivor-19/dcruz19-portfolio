@@ -58,8 +58,8 @@ export default function GetInTouchModal({open, setOpen} : Props) {
               <Send size={50} className='drop-shadow-md'/>
             </Magnet>
             <Magnet padding={80} disabled={false} magnetStrength={50}>    
-              <DialogTitle className="font-lexend font-black text-3xl drop-shadow-md">get in touch with me</DialogTitle>
-              <DialogDescription className="font-mono text-sm text-cpurple drop-shadow-md">
+              <DialogTitle className="font-lexend font-black text-3xl drop-shadow-md text-left">get in touch with me</DialogTitle>
+              <DialogDescription className="font-mono text-sm text-cpurple drop-shadow-md text-left">
               - let's start a conversation — reach out below.
               </DialogDescription>
             </Magnet>

@@ -29,7 +29,7 @@ export default function TechStack() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
     >
-      <span className='text-cpurple'>- technologies I work with</span>
+      <span className='text-cpurple text-sm sm:text-md'>- technologies I work with</span>
       <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2 mt-2">
         {technologies.map((tech, index) => {
 
