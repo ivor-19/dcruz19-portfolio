@@ -91,11 +91,12 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
         parallaxOn={true}
       />
      
-      <div className='w-full  h-screen flex-1 flex flex-col gap-4'>
+      <div className='w-full flex-1 flex flex-col gap-4'>
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
+
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cpurple/10 border border-cpurple/20 w-fit"
         >
           <Sparkles className="w-4 h-4 text-cpurple" />
@@ -167,6 +168,7 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+
             className='h-[300px] lg:h-full rounded-lg border shadow-sm p-4 flex flex-col justify-between gap-2'
           >
             <div className='flex-1'>
@@ -177,18 +179,15 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
               </div>
               <div className="mt-4 w-full flex flex-wrap gap-1"> 
                 {work.tags.map((tag, index) => (
-                  <motion.div 
+                  <div 
                     key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.6 + index * 0.05, duration: 0.3 }}
                     className="group relative"
                   >   
                     <div className="absolute inset-0 bg-linear-to-r from-cpurple/20 to-cpurple/10 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative rounded-lg bg-linear-to-br from-badge to-badge/80 border border-border/50 h-8 px-3 flex items-center justify-center hover:border-cpurple/30 transition-all cursor-default">
                       <span className="text-xs font-medium text-foreground/80 group-hover:text-cpurple transition-colors ">{tag}</span>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -214,31 +213,41 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
             </div>
           </motion.div>
 
-          <div className=' h-40 flex rounded-lg'>
-            {work.image.map((image, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
-                viewport={{ once: true, amount: 0.3 }}
-              
-              >
-                <img 
-                  src={image} 
-                  onClick={() => { setSelectedImageIndex(index), handleImageClick(index) }}
-                  className="h-24 w-24 rounded-lg brightness-80 scale-90 object-cover hover:scale-100 hover:brightness-100 cursor-target transition-color duration-300"
-                />
-              </motion.div>
-            ))}
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+            className=' flex gap-2 rounded-lg p-2 '
+          > 
+            {work.image?.length ? (
+              work.image.map((image, index) => (
+                <div
+                  key={index}
+                >
+                  <Image
+                    src={image}
+                    alt={`${work.title} - Image ${index + 1}`}
+                    width={96}
+                    height={96}
+                    onClick={() => { setSelectedImageIndex(index), handleImageClick(index) }}
+                    className="h-24 w-24 rounded-lg brightness-80 scale-90 object-cover hover:scale-100 hover:brightness-100 cursor-target transition-all duration-300"
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="flex-1 flex items-center justify-center text-muted-foreground text-sm">
+                No images available
+              </div>
+            )}
+          </motion.div>
         </div>
 
         <section className='flex flex-col gap-4 mt-4'>
           <motion.div 
             initial={{ opacity: 0, y: 60 }}              
-            whileInView={{ opacity: 1, y: 0 }}            
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} 
+            animate={{ opacity: 1, y: 0 }}     
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.6 }} 
+
             className='flex flex-col gap-2'
           >
             <div className='flex gap-2 items-center'>
@@ -253,25 +262,17 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
         </section>
         {work.features &&
           <section className='flex flex-col gap-4'>
-            <motion.div 
-              initial={{ opacity: 0, y: 60 }}              
-              whileInView={{ opacity: 1, y: 0 }}            
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} 
-              viewport={{ once: true, amount: 0.5 }}
+            <div 
             >
               <div className='flex gap-2 items-center'>
                 <span className="text-xl font-black drop-shadow-md text-cpurple"> Features </span>
                 <div className="h-px flex-1 bg-linear-to-r from-cpurple/50 to-transparent" />
               </div>
-            </motion.div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {work.features?.map((feature, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  viewport={{ once: true }}
                   className="group relative p-5 rounded-xl bg-linear-to-br from-card/30 to-muted/20 border border-border/30 hover:border-cpurple/30 transition-all"
                 >
                   <div className="absolute inset-0 bg-linear-to-br from-cpurple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
@@ -279,32 +280,24 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
                     <div className="mt-1 h-2 w-2 rounded-full bg-cpurple shrink-0" />
                     <p className='text-muted-foreground group-hover:text-foreground transition-colors text-sm sm:text-base'>{feature}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </section>
         }
         {work.whatIdid && 
           <section className='flex flex-col gap-4'>
-            <motion.div 
-              initial={{ opacity: 0, y: 60 }}              
-              whileInView={{ opacity: 1, y: 0 }}            
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} 
-              viewport={{ once: true, amount: 0.5, margin: "-100px" }}
+            <div 
             >
               <div className='flex gap-2 items-center'>
                 <span className="text-xl font-black drop-shadow-md text-cpurple"> My Contributions </span>
                 <div className="h-px flex-1 bg-linear-to-r from-cpurple/50 to-transparent" />
               </div>
-            </motion.div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">          
               {work.whatIdid?.map((item, index) => (
-                <motion.div
+                <div
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    viewport={{ once: true }}
                     className="group relative p-5 rounded-xl bg-linear-to-br from-card/30 to-muted/20 border border-border/30 hover:border-cpurple/30 transition-all"
                   >
                     <div className="absolute inset-0 bg-linear-to-br from-cpurple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
@@ -312,7 +305,7 @@ export default function WorkDetails({ params }: { params: Promise<{ id: string }
                       <div className="mt-1 h-2 w-2 rounded-full bg-cpurple shrink-0" />
                       <p className='text-muted-foreground group-hover:text-foreground transition-colors text-sm sm:text-base'>{item}</p>
                     </div>
-                  </motion.div>
+                  </div>
               ))}
             </div>
           </section>

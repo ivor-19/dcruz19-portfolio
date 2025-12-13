@@ -5,15 +5,21 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Skeleton } from './ui/skeleton'
 import { WorkData } from '@/lib/types'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel'
-import { ArrowRight, BadgeQuestionMark, ChevronRight, Download, Github, SquareArrowDownRight, SquareArrowOutUpRightIcon } from 'lucide-react'
+import { ArrowRight, Download, Github, Loader, SquareArrowOutUpRightIcon } from 'lucide-react'
 import Link from 'next/link'
+import { AlertDialog, AlertDialogContent, AlertDialogTitle } from './ui/alert-dialog'
+import { useRouter } from 'next/navigation'
 
 export default function MyWorksList() {
   const [data, setData] = useState<WorkData | null>(null)
-  const [open, setOpen] = useState(false)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [navigate, setNavigate] = useState(false)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const router = useRouter()
+
+  const handleNavigate = (id: string) => () => {
+    setNavigate(true)
+    router.push(`/workDetails/${id}`)
+  }
 
   return (
     <>   
@@ -102,12 +108,12 @@ export default function MyWorksList() {
                         </Link> 
                       }
                     </div>
-                    <Link href={`/workDetails/${work.id}`}>
+                    <button onClick={handleNavigate(work.id)}>
                       <div className='bg-muted gap-2 h-8 px-2 text-xs rounded-sm flex items-center justify-center hover:bg-accent cursor-target'>
                         read more
                         <ArrowRight size={16}/>
                       </div>
-                    </Link>
+                    </button>
                   </div>
                 </section>
               </div>
@@ -115,46 +121,12 @@ export default function MyWorksList() {
           </Magnet>
         ))}
       </div>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="min-h-[80%]">
-          <DialogHeader>
-            <DialogTitle className="font-lexend font-black text-2xl uppercase text-center">
-              {data?.title}
-            </DialogTitle>
-            <Skeleton className="h-[40%] w-full mx-auto my-2" />
-            {data?.image ? (
-              <div className="w-full flex justify-center items-center">
-                <Carousel className="w-[80%]">
-                  <CarouselContent className="-ml-2 md:-ml-4">
-                    {data.image.map((imageSrc, index) => (
-                      <CarouselItem 
-                        key={index} 
-                        className="pl-2 md:pl-4 basis-1/2 lg:basis-1/3"
-                      >
-                        <div className="p-1">
-                          <img 
-                            src={imageSrc} 
-                            alt={`${data.title} - Image ${index + 1}`}
-                            className="w-full h-30 rounded-lg object-cover"
-                            onClick={() => console.log('Hello')}
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
-            ) : (
-              <Skeleton className="h-[60%]" />
-            )}
-            <DialogDescription className='font-mono text-xs text-center mt-4'>
-              {data?.description}
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog> 
+      <AlertDialog open={navigate} onOpenChange={setNavigate}>
+        <AlertDialogContent className='bg-none shadow-none flex flex-col items-center justify-center'>
+          <Loader className='animate-spin text-muted-foreground' size={30}/>
+          <AlertDialogTitle className='font-mono text-muted-foreground text-sm'>Loading...</AlertDialogTitle>
+        </AlertDialogContent>
+      </AlertDialog> 
     </>
   )
 }
